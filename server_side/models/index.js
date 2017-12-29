@@ -1,11 +1,14 @@
 var mongoose = require('mongoose');
 
-var db = require('../config/db');
 
-db(mongoose);
+var { secret,isProd } = require('../config/envs');
 
-var User = require('./models/User');
-var Article = require('./models/Article');
-var Comment = require('./models/Comment');
+var User = require('./User');
+var Article = require('./Article');
+var Comment = require('./Comment');
 
-module.export = {User,Article,Comment};
+module.exports = function(){
+	return {User:User,Article:Article,Comment:Comment}
+}
+
+

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
-var jwt = require('jsonwebstoken');
+var jwt = require('jsonwebtoken');
 var secret = require('../config/envs').secret;
 
 var UserSchema = new mongoose.Schema({
@@ -21,7 +21,7 @@ var UserSchema = new mongoose.Schema({
 	image:{
 		type: String,
 		default: "https://static.productionready.io/images/smiley-cyrus.jpg"
-	}
+	},
 	favorites: [{
 		type:mongoose.Schema.Types.ObjectId,
 		ref:'Article'
@@ -55,7 +55,7 @@ UserSchema.methods.setPassword = function(password){
 
 UserSchema.methods.generateJWT = function(){
 	return jwt.sign({
-		id:this._id;
+		id:this._id,
 		username:this.username,
 		exp: Math.floor(Date.now() / 1000) + (60 * 60),
 	}, secret);

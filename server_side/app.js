@@ -1,5 +1,5 @@
-var express= require('express'),
-	
+var express= require('express');
+var mongoose = require('mongoose');
 var config = require('./config/configServer'),
 		{secret,isProd} = require('./config/envs');
 
@@ -8,10 +8,30 @@ var app = express();
 
 app = config(app);
 
-var {User,Comment,Article} = require('./modles/index');
+
+
+
+
+mongoose.Promise = global.Promise;
+
+if(isProd){
+	mongoose.connect(process.env.MONGODB_URI)
+}else{
+	mongoose.connect('mongodb://localhost/conduit',{
+		keepAlive: true,
+  	reconnectTries: Number.MAX_VALUE,
+  	useMongoClient: true
+	}).then(()=>{console.log('mongodb connected...')})
+		.catch((err)=>{console.log(err)});
+	mongoose.set('debug',true);
+}
+
+//require models
+require('./models')();
 
 
 require('./config/passport');
+
 
 //set routes
 app.use(require('./routes'));

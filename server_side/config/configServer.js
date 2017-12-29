@@ -29,7 +29,8 @@ module.exports = function(app){
 		resave:true,
 		saveUninitialized:false
 	}));
-
+	
+	
 	if(!isProd){
 		app.use(errorhandler())
 	}
