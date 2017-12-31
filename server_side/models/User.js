@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 var jwt = require('jsonwebtoken');
 var secret = require('../config/envs').secret;
+var bcrypt = require('bcryptjs');
 
 var UserSchema = new mongoose.Schema({
 	username:{
@@ -30,27 +31,28 @@ var UserSchema = new mongoose.Schema({
 		type:mongoose.Schema.Types.ObjectId,
 		ref:'User'
 	}],
-	password:{type:String,require:true},
+	password:{
+		type:String,
+		require:true
+	},
 	salt: String
 },{timestamps: true});
 
 
 UserSchema.plugin(uniqueValidator,{message:'is already taken.'});
 
-UserSchema.methods.validPassword = function(password){
+UserSchema.methods.validPassword = function(password,next){
 	bcrypt.compare(password,this.password,function(err,isMatch){
 		if(err)return next(err);
-		next(err,isMatch);
+		return next(err,isMatch);
 	})
 }
 
+//[salt,password]
 UserSchema.methods.setPassword = function(password){
-	bcrypt.genSalt(10,function(err,salt){
-		this.salt = salt;
-		bcrypt.hash(password, salt, function(err, hashedPassword) {
-			this.password = hashedPassword
-		})
-	})
+	var salt = bcrypt.genSaltSync(10);
+	this.salt = salt;
+	this.password = bcrypt.hashSync(password,salt);
 }
 
 UserSchema.methods.generateJWT = function(){

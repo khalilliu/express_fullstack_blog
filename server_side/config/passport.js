@@ -2,7 +2,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-
+var colors = require('colors');
 
 passport.use(new LocalStrategy({
 	usernameField: 'user[email]',
@@ -12,10 +12,18 @@ passport.use(new LocalStrategy({
 		// if(!user||!user.validPassword(password)){
 		// 	return done(null,false,{errors:{ 'email or password' : 'is invalid' }})
 		// }
-		user.validPassword(password,function(err,isMatch){
+		console.log(user);
+		if(!user){
+			return done(null,false,{errors:{ 'email or password' : 'is invalid' }})
+		}else{
+
+			user.validPassword(password,function(err,isMatch){
+				console.log(isMatch)
 			if(isMatch){return done(null,user)}
 			else{return done(null,false,{errors:{ 'email or password' : 'is invalid' }})}
-		})
+			})
+		}
+		
 
 	}).catch(done);
 }))

@@ -33,7 +33,7 @@ var ArticleSchema = new mongoose.Schema({
 
 ArticleSchema.plugin(uniqueValidator, {message: 'is already taken'});
 
-ArticleSchema.pre('validator',function(next){
+ArticleSchema.pre('validate',function(next){
 	if(!this.slug){
 		this.slugify();
 	}
