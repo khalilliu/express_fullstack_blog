@@ -209,7 +209,7 @@ router.post('/:article/favorite',auth.required,function(req,res,next){
 })
 
 //return a artilce's comment
-router.get('/:article/comment', auth.optional, function(req,res,next){
+router.get('/:article/comments', auth.optional, function(req,res,next){
 	Promise.resolve(req.payload ? User.findById(req.payload.id) : null)
 		.then(function(user){
 			return req.article.populate({
@@ -222,7 +222,7 @@ router.get('/:article/comment', auth.optional, function(req,res,next){
 						createdAt: 'desc'
 					}
 				}
-			}).exec(function(article){
+			}).execPopulate().then(function(article){
 				return res.json({
 					comments: req.article.comments.map(function(comment){
 						return comment.toJSONFor(user);
@@ -242,7 +242,7 @@ router.post('/:article/comments', auth.optional,function(req,res,next){
 		comment.author = user;
 
 		return comment.save().then(function(){
-			res.article.comments.push(comment);
+			req.article.comments.push(comment);
 
 			return req.article.save().then(function(article){
 				res.json({comment: comment.toJSONFor(user)})
