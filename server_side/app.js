@@ -9,9 +9,6 @@ var app = express();
 app = config(app);
 
 
-
-
-
 mongoose.Promise = global.Promise;
 
 if(isProd){
