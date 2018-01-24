@@ -14,10 +14,10 @@ import Home from '../components/Home';
 
 const mapStateToProps = (state) => {
 	return {
-		appLoaded: state.common.appLoaded,
-		appName: state.common.appName,
-		currentUser: state.common.currentUser,
-		redirectTo: state.common.redirectTo
+		appLoaded: state.common.appLoaded ,
+		appName: state.common.appName ,
+		currentUser: state.common.currentUser ,
+		redirectTo: state.common.redirectTo 
 	}
 };
 
@@ -53,9 +53,11 @@ class App extends React.Component {
 						appName={this.props.appName}
 						currentUser={this.props.currentUser}
 					/>
-					<p>dasdsad</p>
+					
 					<Switch>
 						<Route exec path='/' component={Home} /> 
+						<Route path='/login' component={Login} />
+						<Route path='/register' component={Register} />
 					</Switch>
 				</div>
 			)
@@ -66,7 +68,7 @@ class App extends React.Component {
 					appName={this.props.appName}
 					currentUser={this.props.currentUser}
 				/>
-				<p>dasdsad</p>
+				
 			</div>
 		)
 	}
