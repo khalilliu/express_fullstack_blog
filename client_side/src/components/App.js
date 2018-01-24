@@ -10,7 +10,9 @@ import {APP_LOAD, REDIRECT} from '../constants/actionTypes';
 
 //component
 import Header from './Header';
-import Home from '../components/Home';
+import Home from './Home';
+import Login from './Login';
+import Register from './Register';
 
 const mapStateToProps = (state) => {
 	return {
@@ -55,10 +57,11 @@ class App extends React.Component {
 					/>
 					
 					<Switch>
-						<Route exec path='/' component={Home} /> 
-						<Route path='/login' component={Login} />
-						<Route path='/register' component={Register} />
-					</Switch>
+						<Route exec path='/home' component={Home} /> 
+						<Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+          </Switch>
+					
 				</div>
 			)
 		};
