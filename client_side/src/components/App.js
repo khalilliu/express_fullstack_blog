@@ -13,6 +13,8 @@ import Header from './Header';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
+import Settings from './Settings';
+
 
 const mapStateToProps = (state) => {
 	return {
@@ -27,7 +29,7 @@ const mapDispatchToProps = (dispatch) => ({
 		onLoad: (payload, token) => 
 			dispatch({type: APP_LOAD, payload, token, skipTracking: true}),
 		onRedirect: () => {
-			dispatch({type: REDIRECT})
+			dispatch({type: REDIRECT});
 		}
 })
 
@@ -44,6 +46,7 @@ class App extends React.Component {
 		if(token){
 			agent.setToken(token);
 		}
+		//dispatch({APP_Loaded,token,payload:Auth.current()})
 		this.props.onLoad(token ? agent.Auth.current():null, token);
 	}
 
@@ -60,6 +63,7 @@ class App extends React.Component {
 						<Route exec path='/home' component={Home} /> 
 						<Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/settings" component={Settings} />
           </Switch>
 					
 				</div>

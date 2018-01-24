@@ -32,4 +32,5 @@ export default (state={},action) => {
 			return {...state}
 			break;
 	}
+	return {...state};
 }

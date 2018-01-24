@@ -1,3 +1,4 @@
+
 import agent from './agent';
 import {
 	LOGIN,
@@ -29,6 +30,7 @@ const promiseMiddleware = store => next => action => {
 				if(!skipTracking && currentState.viewChangeCounter !== currentView){
 					return;
 				};
+				action.error = true;
 				action.payload = error.response.body;
 				if(!action.skipTracking){
 					store.dispatch({type: ASYNC_END, promise: action.payload});
