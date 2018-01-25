@@ -14,6 +14,7 @@ import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 import Settings from './Settings';
+import Profile from './Profile';
 
 
 const mapStateToProps = (state) => {
@@ -60,15 +61,17 @@ class App extends React.Component {
 					/>
 					
 					<Switch>
-						<Route exec path='/home' component={Home} /> 
+						<Route exact path='/' component={Home} /> 
 						<Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/settings" component={Settings} />
+            <Route path='/@:username' component={Profile} />
           </Switch>
 					
 				</div>
 			)
-		};
+		}
+
 		return (
 			<div>
 				<Header 
