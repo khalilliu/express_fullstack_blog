@@ -35,7 +35,7 @@ const FollowUserButton = props => {
 	const handleClick = ev =>{
 		ev.preventDefault();
 		if(props.user.following){
-			props.unfollow(props.user.username);
+			props.Unfollow(props.user.username);
 		}else {
 			props.follow(props.user.username);
 		}

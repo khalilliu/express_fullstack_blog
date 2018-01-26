@@ -6,6 +6,7 @@ import auth from './reducers/auth';
 import home from './reducers/home';
 import settings from './reducers/settings';
 import profile from './reducers/profile';
+import articleList from './reducers/articleList';
 
 
 export default combineReducers({
@@ -14,5 +15,6 @@ export default combineReducers({
 	auth,
 	settings,
 	profile,
+	articleList,
 	router: routerReducer
 });
