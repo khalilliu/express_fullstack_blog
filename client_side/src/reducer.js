@@ -7,7 +7,7 @@ import home from './reducers/home';
 import settings from './reducers/settings';
 import profile from './reducers/profile';
 import articleList from './reducers/articleList';
-
+import editor from './reducers/editor';
 
 export default combineReducers({
 	home,
@@ -16,5 +16,6 @@ export default combineReducers({
 	settings,
 	profile,
 	articleList,
+	editor,
 	router: routerReducer
 });
