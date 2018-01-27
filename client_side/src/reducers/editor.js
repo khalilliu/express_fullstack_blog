@@ -24,8 +24,17 @@ export default (state={}, action) => {
 			return {};
 		case ARTICLE_SUBMITTED:
 			return {
-
+				...state,
+				inProgress:null,
+				errors: action.error ? action.payload.errors : null
 			};
+		case ASYNC_START:
+			if(action.subType == ARTICLE_SUBMITTED){
+				return {
+					...state, inProgress: true
+				}
+			}
+			break;
 		case UPDATE_FIELD_EDITOR:
 			return{...state, [action.key]:action.value};
 		case ADD_TAG:

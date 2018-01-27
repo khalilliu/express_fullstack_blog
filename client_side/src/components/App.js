@@ -17,7 +17,7 @@ import Settings from './Settings';
 import Profile from './Profile';
 import ProfileFavorites from './ProfileFavorites';
 import Editor from './Editor';
-
+import Article from './Article';
 
 
 const mapStateToProps = (state) => {
@@ -51,7 +51,7 @@ class App extends React.Component {
 			agent.setToken(token);
 		}
 		//dispatch({APP_Loaded,token,payload:Auth.current()})
-		this.props.onLoad(token ? agent.Auth.current():null, token);
+		this.props.onLoad(token ? agent.Auth.current() : null, token);
 	}
 
 	render(){
@@ -71,6 +71,7 @@ class App extends React.Component {
             <Route path='/@:username/favorites' component={ProfileFavorites}/>
             <Route path='/@:username' component={Profile} />
             <Route path='/editor' component={Editor} />
+            <Route path='/article/:id' component={Article} />
           </Switch>
 					
 				</div>
