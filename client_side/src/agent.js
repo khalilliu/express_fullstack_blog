@@ -73,7 +73,7 @@ const Comments = {
 	delete: (slug, commentId) => 
 		requests.del(`/articles/${slug}/comments/${commentId}`),
 	forArticle: slug =>
-		requests.get(`/articles/${slug}/commands`)
+		requests.get(`/articles/${slug}/comments`)
 };
 
 const Profile = {

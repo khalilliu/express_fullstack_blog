@@ -34,6 +34,7 @@ export default (state={}, action) => {
 					...state, inProgress: true
 				}
 			}
+			return {...state};
 			break;
 		case UPDATE_FIELD_EDITOR:
 			return{...state, [action.key]:action.value};
