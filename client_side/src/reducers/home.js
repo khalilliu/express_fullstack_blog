@@ -10,12 +10,9 @@ export default (state={}, action) => {
 				...state,
 				tags: action.payload[0].tags
 			};
-			break;
 		case HOME_PAGE_UNLOADED:
 			return {};
-			break;
 		default:
 			return state;
-			break;
 	}
 }
